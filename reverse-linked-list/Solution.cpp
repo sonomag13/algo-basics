@@ -36,6 +36,23 @@ public:
      * @param head: n
      * @return: The new head of reversed linked list.
      */
+
+    ListNode * reverse_nonrecrusive(ListNode * head) {
+        // write your code here        
+        if (head == NULL) {
+            return NULL; 
+        }        
+        ListNode* prevNode = NULL; 
+        ListNode* currentNode = head;         
+        while(currentNode != NULL) {
+            ListNode* nextNode = currentNode->next;
+            currentNode->next = prevNode; 
+            prevNode = currentNode; 
+            currentNode = nextNode; 
+        }        
+        return prevNode;         
+    }
+
     ListNode * reverse(ListNode * head) {
         
         if (!head) {
