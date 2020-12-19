@@ -59,25 +59,49 @@ public:
             return NULL; 
         }
         
-        reverse_by_recursion(head); 
+        _reverse_by_recursion(head); 
         return this->newHead; 
     }
     
 private: 
     ListNode* newHead{NULL}; 
     
-    ListNode* reverse_by_recursion(ListNode* curNode) {
+    // reverse the list recursively
+    ListNode* _reverse_by_recursion(ListNode* curNode) {
+        // base case
         if (curNode->next == NULL) {
-            this->newHead = curNode; 
-            return curNode; 
+            this->root = curNode; 
+            return root; 
         }
         
-        ListNode* preNode = reverse_by_recursion(curNode->next);
-        preNode->next = curNode; 
+        /*
+            - 
+            - link the current node to the next pointer of the previous node
+            - nollify the next pointer of the prevous node        
+         */ 
+        
+        // calculate the previous node
+        ListNode* preNode = _reverseList(curNode->next);
+        
+        /*
+         * Solution 1
+         * - create a new node with the value value of the current node with null next pointer
+         * - return the new node
+         */
+        auto newNode = new ListNode(curNode->val); 
+        preNode->next = newNode; 
+        return newNode;          
+                
+        /*
+         * Solution 2
+         * - nullify the next pointer of the current node
+         * - return the current node
+         */
+        /*
+        preNode->next = curNode;
         curNode->next = NULL; 
-        
-        return curNode; 
-        
+        return curNode;                  
+         */
     } 
     
 };
